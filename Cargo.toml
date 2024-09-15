@@ -1,0 +1,11 @@
+[package]
+name = "hank-types"
+version = "0.1.0"
+edition = "2021"
+build = "build.rs"
+
+[dependencies]
+prost = "0.13.2"
+
+[build-dependencies]
+prost-build = "0.13.2"
