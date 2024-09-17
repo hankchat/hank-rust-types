@@ -17,7 +17,7 @@ alias e := edit
     $EDITOR "{{ justfile() }}"
 
 types:
-    # rm -rf src/*
+    rm -rf src/*
     protoc --proto_path=protos \
         --prost-crate_out=. \
         --prost-crate_opt=gen_crate=Cargo.toml \
