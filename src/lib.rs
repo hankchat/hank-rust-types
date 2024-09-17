@@ -29,3 +29,5 @@ pub mod hank {
         // @@protoc_insertion_point(hank.plugin)
     }
 }
+
+pub use hank::*;

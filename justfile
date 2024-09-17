@@ -22,3 +22,4 @@ types:
         --prost-crate_out=. \
         --prost-crate_opt=gen_crate=Cargo.toml \
         {{ protos }}
+    echo "\npub use hank::*;" >> src/lib.rs
