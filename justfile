@@ -19,6 +19,7 @@ alias e := edit
 types:
     rm -rf src/*
     protoc --proto_path=protos \
+        --prost_out=src \
         --prost-crate_out=. \
         --prost-crate_opt=gen_crate=Cargo.toml \
         {{ protos }}
