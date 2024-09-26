@@ -19,6 +19,15 @@ clean:
     git reset --hard
     git clean -f .
 
+commit:
+    git add -u
+    git add src/
+    git commit -m "Add generated types"
+
+publish version="patch":
+    cargo bump -g {{ version }}
+    cargo publish
+
 types protos="protos":
     rm -rf src/*
     protos="$(find {{ protos }} -iname "*.proto" | xargs)" && \
