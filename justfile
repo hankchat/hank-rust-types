@@ -14,6 +14,11 @@ alias e := edit
 @edit:
     $EDITOR "{{ justfile() }}"
 
+[confirm("Are you sure?")]
+clean:
+    git reset --hard
+    git clean -f .
+
 types protos="protos":
     rm -rf src/*
     protos="$(find {{ protos }} -iname "*.proto" | xargs)" && \
