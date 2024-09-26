@@ -11,6 +11,7 @@ edition = "2021"
 
 [dependencies]
 prost = "0.13.2"
+serde = { version = "1.0.210", features = ["serde_derive"] }
 
 [features]
 default = ["proto_full"]

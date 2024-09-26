@@ -1,6 +1,4 @@
 chooser := "grep -v choose | fzf --tmux"
-protos := `find protos/* -iname "*.proto" | xargs`
-
 # Display this list of available commands
 @list:
     just --justfile "{{ source_file() }}" --list
@@ -16,11 +14,16 @@ alias e := edit
 @edit:
     $EDITOR "{{ justfile() }}"
 
-types:
+types protos="protos":
     rm -rf src/*
-    protoc --proto_path=protos \
-        --prost_out=src \
-        --prost-crate_out=. \
-        --prost-crate_opt=gen_crate=Cargo.toml \
-        {{ protos }}
-    echo "\npub use hank::*;" >> src/lib.rs
+    protos="$(find {{ protos }} -iname "*.proto" | xargs)" && \
+        protoc --proto_path={{ protos }} \
+            --prost_out=src \
+            --prost_opt=type_attribute=hank.access_check.AccessCheck="#[derive(serde::Serialize\, serde::Deserialize)]" \
+            --prost_opt=type_attribute=hank.access_check.AccessCheck.kind="#[derive(serde::Serialize\, serde::Deserialize)]" \
+            --prost_opt=enum_attribute=hank.access_check.AccessCheck.kind='#[serde(rename_all = "snake_case")]' \
+            --prost_opt=field_attribute=hank.access_check.AccessCheck.kind='#[serde(flatten)]' \
+            --prost-crate_out=. \
+            --prost-crate_opt=gen_crate=./Cargo.toml \
+            $protos
+    cat lib.customizations.rs >> src/lib.rs
