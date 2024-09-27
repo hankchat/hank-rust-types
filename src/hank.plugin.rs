@@ -15,7 +15,13 @@ pub struct Metadata {
     #[prost(string, tag="3")]
     pub version: ::prost::alloc::string::String,
     /// When true, a SQLite3 database will be created for the plugin.
+    /// @deprecated All plugins get a database by default now.
     #[prost(bool, tag="4")]
     pub database: bool,
+    /// Access checks
+    ///
+    /// All functionality of this plugin can optionally be gated by accses checks.
+    #[prost(message, optional, tag="5")]
+    pub access_checks: ::core::option::Option<super::access_check::AccessCheckChain>,
 }
 // @@protoc_insertion_point(module)
