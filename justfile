@@ -27,6 +27,7 @@ commit:
 publish version="patch":
     cargo bump -g {{ version }}
     cargo publish
+    git push --follow-tags
 
 types protos="protos":
     rm -rf src/*
