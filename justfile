@@ -25,9 +25,11 @@ commit:
     git commit -m "Add generated types"
 
 publish version="patch":
-    cargo bump -g {{ version }}
-    cargo publish
-    git push --follow-tags
+    cargo release version {{ version }} --no-confirm --execute
+    cargo release commit --no-confirm --execute
+    cargo release tag --no-confirm --execute
+    cargo release push --no-confirm --execute
+    cargo release publish --no-confirm --execute
 
 types protos="protos":
     rm -rf src/*
