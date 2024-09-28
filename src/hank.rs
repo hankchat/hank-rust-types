@@ -58,4 +58,15 @@ pub struct OneShotInput {
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct OneShotOutput {
 }
+/// \[Internal\] Input to a reload plugin request to Hank.
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ReloadPluginInput {
+    /// The plugin to reload.
+    #[prost(string, tag="1")]
+    pub plugin: ::prost::alloc::string::String,
+}
+/// \[Internal\] Output from a reload plugin request to Hank.
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct ReloadPluginOutput {
+}
 // @@protoc_insertion_point(module)
