@@ -26,6 +26,25 @@ impl EscalatedPrivilege {
         }
     }
 }
+/// Plugin command context.
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct CommandContext {
+    /// The name of the command.
+    #[prost(string, tag="1")]
+    pub name: ::prost::alloc::string::String,
+    /// Valid arguments for this command.
+    #[prost(string, repeated, tag="2")]
+    pub valid_arguments: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+    /// Valid subcommands for this command.
+    #[prost(string, repeated, tag="3")]
+    pub valid_subcommands: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+    /// Arguments passed to the command.
+    #[prost(map="string, string", tag="4")]
+    pub arguments: ::std::collections::HashMap<::prost::alloc::string::String, ::prost::alloc::string::String>,
+    /// Optional nested subcommand context.
+    #[prost(message, optional, boxed, tag="5")]
+    pub subcommand: ::core::option::Option<::prost::alloc::boxed::Box<CommandContext>>,
+}
 /// Arguments for a plugin or a plugins subcommands.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Argument {
