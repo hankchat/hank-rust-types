@@ -69,4 +69,15 @@ pub struct ReloadPluginInput {
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct ReloadPluginOutput {
 }
+/// \[Internal\] Input to a handle chat command request to Hank.
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct HandleChatCommandInput {
+    /// The chat command context to send to Hank.
+    #[prost(message, optional, tag="1")]
+    pub context: ::core::option::Option<plugin::CommandContext>,
+}
+/// \[Internal\] Output from a handle chat command request to Hank.
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct HandleChatCommandOutput {
+}
 // @@protoc_insertion_point(module)
