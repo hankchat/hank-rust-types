@@ -162,7 +162,7 @@ pub struct Metadata {
     #[prost(string, repeated, tag="15")]
     pub allowed_hosts: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
     /// Pool size this plugin requests.
-    #[prost(int32, tag="16")]
-    pub pool_size: i32,
+    #[prost(int32, optional, tag="16")]
+    pub pool_size: ::core::option::Option<i32>,
 }
 // @@protoc_insertion_point(module)
