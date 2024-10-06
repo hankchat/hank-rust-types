@@ -69,6 +69,17 @@ pub struct ReloadPluginInput {
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct ReloadPluginOutput {
 }
+/// \[Internal\] Input to a load plugin request to Hank.
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct LoadPluginInput {
+    /// The url to a compiled plugins wasm file to load.
+    #[prost(string, tag="1")]
+    pub url: ::prost::alloc::string::String,
+}
+/// \[Internal\] Output from a load plugin request to Hank.
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct LoadPluginOutput {
+}
 /// \[Internal\] Input to a handle chat command request to Hank.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct HandleChatCommandInput {

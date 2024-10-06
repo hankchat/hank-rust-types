@@ -28,6 +28,7 @@ pub struct CommandContext {
 pub enum EscalatedPrivilege {
     All = 0,
     ReloadPlugin = 1,
+    LoadPlugin = 2,
 }
 impl EscalatedPrivilege {
     /// String value of the enum field names used in the ProtoBuf definition.
@@ -38,6 +39,7 @@ impl EscalatedPrivilege {
         match self {
             EscalatedPrivilege::All => "ALL",
             EscalatedPrivilege::ReloadPlugin => "RELOAD_PLUGIN",
+            EscalatedPrivilege::LoadPlugin => "LOAD_PLUGIN",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -45,6 +47,7 @@ impl EscalatedPrivilege {
         match value {
             "ALL" => Some(Self::All),
             "RELOAD_PLUGIN" => Some(Self::ReloadPlugin),
+            "LOAD_PLUGIN" => Some(Self::LoadPlugin),
             _ => None,
         }
     }
@@ -97,6 +100,11 @@ pub struct Command {
     /// Command subcommands.
     #[prost(message, repeated, tag="7")]
     pub subcommands: ::prost::alloc::vec::Vec<Command>,
+    /// Access checks
+    ///
+    /// This command can optionally be gated by access checks.
+    #[prost(message, optional, tag="8")]
+    pub access_checks: ::core::option::Option<super::access_check::AccessCheckChain>,
 }
 /// Metadata for a plugin.
 #[cfg_attr(feature = "kameo", derive(kameo::Reply))]
@@ -150,5 +158,11 @@ pub struct Metadata {
     /// Plugin subcommands.
     #[prost(message, repeated, tag="14")]
     pub subcommands: ::prost::alloc::vec::Vec<Command>,
+    /// Hosts that this plugin requests permissions to access via HTTP.
+    #[prost(string, repeated, tag="15")]
+    pub allowed_hosts: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+    /// Pool size this plugin requests.
+    #[prost(int32, tag="16")]
+    pub pool_size: i32,
 }
 // @@protoc_insertion_point(module)
