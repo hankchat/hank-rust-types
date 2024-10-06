@@ -77,8 +77,11 @@ pub struct LoadPluginInput {
     pub url: ::prost::alloc::string::String,
 }
 /// \[Internal\] Output from a load plugin request to Hank.
-#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LoadPluginOutput {
+    /// The metadata returned by the loaded plugin.
+    #[prost(message, optional, tag="1")]
+    pub metadata: ::core::option::Option<plugin::Metadata>,
 }
 /// \[Internal\] Input to a handle chat command request to Hank.
 #[derive(Clone, PartialEq, ::prost::Message)]
