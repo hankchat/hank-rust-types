@@ -75,6 +75,9 @@ pub struct HandleChatCommandInput {
     /// The chat command context to send to Hank.
     #[prost(message, optional, tag="1")]
     pub context: ::core::option::Option<plugin::CommandContext>,
+    /// The message that the chat command originates from.
+    #[prost(message, optional, tag="2")]
+    pub message: ::core::option::Option<message::Message>,
 }
 /// \[Internal\] Output from a handle chat command request to Hank.
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
