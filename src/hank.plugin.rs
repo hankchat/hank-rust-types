@@ -17,8 +17,8 @@ pub struct CommandContext {
     #[prost(string, tag="1")]
     pub name: ::prost::alloc::string::String,
     /// Arguments passed to the command.
-    #[prost(map="int32, message", tag="2")]
-    pub arguments: ::std::collections::HashMap<i32, CommandContextArgument>,
+    #[prost(message, repeated, tag="2")]
+    pub arguments: ::prost::alloc::vec::Vec<CommandContextArgument>,
     /// Optional nested subcommand context.
     #[prost(message, optional, boxed, tag="3")]
     pub subcommand: ::core::option::Option<::prost::alloc::boxed::Box<CommandContext>>,
