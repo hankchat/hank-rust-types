@@ -42,6 +42,7 @@ types protos="protos":
             --prost_opt=field_attribute=hank.access_check.AccessCheck.kind='#[serde(flatten)]' \
             --prost_opt=type_attribute=hank.plugin.Metadata='#[cfg_attr(feature = "kameo"\, derive(kameo::Reply))]' \
             --prost_opt=type_attribute=.hank.plugin="#[derive(serde::Serialize\, serde::Deserialize)]" \
+            --prost_opt=message_attribute=.hank.plugin="#[serde(default)]" \
             --prost-crate_out=. \
             --prost-crate_opt=gen_crate=./Cargo.toml \
             $protos
