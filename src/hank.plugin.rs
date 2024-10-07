@@ -32,6 +32,7 @@ impl EscalatedPrivilege {
 }
 /// Arguments for a plugin or a plugins subcommands.
 #[derive(serde::Serialize, serde::Deserialize)]
+#[serde(default)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Argument {
     /// Argument name.
@@ -55,6 +56,7 @@ pub struct Argument {
 }
 /// Plugin commands.
 #[derive(serde::Serialize, serde::Deserialize)]
+#[serde(default)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Command {
     /// Command name.
@@ -89,6 +91,7 @@ pub struct Command {
 /// Metadata for a plugin.
 #[cfg_attr(feature = "kameo", derive(kameo::Reply))]
 #[derive(serde::Serialize, serde::Deserialize)]
+#[serde(default)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Metadata {
     /// The plguins name.
@@ -148,6 +151,7 @@ pub struct Metadata {
 }
 /// An argument passed to a commands context.
 #[derive(serde::Serialize, serde::Deserialize)]
+#[serde(default)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CommandContextArgument {
     /// The name of the argument.
@@ -159,6 +163,7 @@ pub struct CommandContextArgument {
 }
 /// Plugin command context.
 #[derive(serde::Serialize, serde::Deserialize)]
+#[serde(default)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CommandContext {
     /// The name of the command.
