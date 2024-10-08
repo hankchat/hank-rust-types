@@ -72,9 +72,25 @@ pub struct ReloadPluginOutput {
 /// \[Internal\] Input to a load plugin request to Hank.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LoadPluginInput {
-    /// The url to a compiled plugins wasm file to load.
-    #[prost(string, tag="1")]
-    pub url: ::prost::alloc::string::String,
+    /// A compiled plugin wasm file to load.
+    #[prost(oneof="load_plugin_input::Wasm", tags="1, 2, 3")]
+    pub wasm: ::core::option::Option<load_plugin_input::Wasm>,
+}
+/// Nested message and enum types in `LoadPluginInput`.
+pub mod load_plugin_input {
+    /// A compiled plugin wasm file to load.
+    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    pub enum Wasm {
+        /// Get compiled plugin wasm file from a url.
+        #[prost(string, tag="1")]
+        Url(::prost::alloc::string::String),
+        /// Get compiled plugin wasm file from a path on hanks system.
+        #[prost(string, tag="2")]
+        Path(::prost::alloc::string::String),
+        /// Compiled plugin wasm file as bytes.
+        #[prost(bytes, tag="3")]
+        Bytes(::prost::alloc::vec::Vec<u8>),
+    }
 }
 /// \[Internal\] Output from a load plugin request to Hank.
 #[derive(Clone, PartialEq, ::prost::Message)]
