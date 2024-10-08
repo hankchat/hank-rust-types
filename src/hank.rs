@@ -82,6 +82,9 @@ pub struct LoadPluginOutput {
     /// The metadata returned by the loaded plugin.
     #[prost(message, optional, tag="1")]
     pub metadata: ::core::option::Option<plugin::Metadata>,
+    /// The plugins extism::Manifest, as JSON.
+    #[prost(string, tag="2")]
+    pub manifest: ::prost::alloc::string::String,
 }
 /// \[Internal\] Input to a handle chat command request to Hank.
 #[derive(Clone, PartialEq, ::prost::Message)]
