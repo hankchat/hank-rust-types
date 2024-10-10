@@ -102,6 +102,65 @@ pub struct LoadPluginOutput {
     #[prost(string, tag="2")]
     pub manifest: ::prost::alloc::string::String,
 }
+/// \[Internal\] Input to a InstructionKind::ChatCommand request to Hank.
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct ChatCommandInput {
+}
+/// \[Internal\] Output from a InstructionKind::ChatCommand request to Hank.
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct ChatCommandOutput {
+}
+/// \[Internal\] Input to a InstructionKind::ChatMessage request to Hank.
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct ChatMessageInput {
+}
+/// \[Internal\] Output from a InstructionKind::ChatMessage request to Hank.
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct ChatMessageOutput {
+}
+/// \[Internal\] Input to a InstructionKind::GetMetadata request to Hank.
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct GetMetadataInput {
+}
+/// \[Internal\] Output from a InstructionKind::GetMetadata request to Hank.
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetMetadataOutput {
+    /// The metadata returned by the plugin.
+    #[prost(message, optional, tag="1")]
+    pub metadata: ::core::option::Option<plugin::Metadata>,
+}
+/// \[Internal\] Input to a InstructionKind::Initialize request to Hank.
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct InitializeInput {
+}
+/// \[Internal\] Output from a InstructionKind::Initialize request to Hank.
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct InitializeOutput {
+}
+/// \[Internal\] Input to a InstructionKind::Install request to Hank.
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct InstallInput {
+}
+/// \[Internal\] Output from a InstructionKind::Install request to Hank.
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct InstallOutput {
+}
+/// \[Internal\] Input to a InstructionKind::SheduledJob request to Hank.
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct ScheduledJobInput {
+}
+/// \[Internal\] Output from a InstructionKind::ScheduledJob request to Hank.
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct ScheduledJobOutput {
+}
+/// \[Internal\] Input to a InstructionKind::Shutdown request to Hank.
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct ShutdownInput {
+}
+/// \[Internal\] Output from a InstructionKind::Shutdown request to Hank.
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct ShutdownOutput {
+}
 /// \[Internal\] Input to a handle chat command request to Hank.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct HandleChatCommandInput {

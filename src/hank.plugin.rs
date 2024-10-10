@@ -176,4 +176,73 @@ pub struct CommandContext {
     #[prost(message, optional, boxed, tag="3")]
     pub subcommand: ::core::option::Option<::prost::alloc::boxed::Box<CommandContext>>,
 }
+/// \[Internal\] An instruction to send to hank plugin.
+#[derive(serde::Serialize, serde::Deserialize)]
+#[serde(default)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct Instruction {
+    /// The kind of instruction to send to the hank plugin.
+    #[prost(enumeration="InstructionKind", tag="1")]
+    pub kind: i32,
+    /// An input to send to the hank plugin.
+    #[prost(bytes="vec", tag="2")]
+    pub input: ::prost::alloc::vec::Vec<u8>,
+    /// An optional target plugin name to send the instruciton to.
+    #[prost(string, optional, tag="3")]
+    pub target: ::core::option::Option<::prost::alloc::string::String>,
+}
+/// \[Internal\] Kinds of instructions that can be sent to hank plugins.
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+#[repr(i32)]
+pub enum InstructionKind {
+    /// Plugin entry point.
+    Plugin = 0,
+    /// Get the plugins metadata.
+    GetMetadata = 1,
+    /// Call the plugins install function. (only happens once)
+    Install = 2,
+    /// Call the plugins initialize function. (happens on every load)
+    Initialize = 3,
+    /// Call the plugins shutdown function. (happens on reload, unload, uninstall)
+    Shutdown = 4,
+    /// Call the plguins chat message handler.
+    ChatMessage = 5,
+    /// Call the plguins chat command handler.
+    ChatCommand = 6,
+    /// Call the plguins scheduled job handler.
+    ScheduledJob = 7,
+}
+impl InstructionKind {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            InstructionKind::Plugin => "Plugin",
+            InstructionKind::GetMetadata => "GetMetadata",
+            InstructionKind::Install => "Install",
+            InstructionKind::Initialize => "Initialize",
+            InstructionKind::Shutdown => "Shutdown",
+            InstructionKind::ChatMessage => "ChatMessage",
+            InstructionKind::ChatCommand => "ChatCommand",
+            InstructionKind::ScheduledJob => "ScheduledJob",
+        }
+    }
+    /// Creates an enum from field names used in the ProtoBuf definition.
+    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+        match value {
+            "Plugin" => Some(Self::Plugin),
+            "GetMetadata" => Some(Self::GetMetadata),
+            "Install" => Some(Self::Install),
+            "Initialize" => Some(Self::Initialize),
+            "Shutdown" => Some(Self::Shutdown),
+            "ChatMessage" => Some(Self::ChatMessage),
+            "ChatCommand" => Some(Self::ChatCommand),
+            "ScheduledJob" => Some(Self::ScheduledJob),
+            _ => None,
+        }
+    }
+}
 // @@protoc_insertion_point(module)
