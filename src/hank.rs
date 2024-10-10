@@ -103,16 +103,25 @@ pub struct LoadPluginOutput {
     pub manifest: ::prost::alloc::string::String,
 }
 /// \[Internal\] Input to a InstructionKind::ChatCommand request to Hank.
-#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ChatCommandInput {
+    /// The chat command context to send to Hank.
+    #[prost(message, optional, tag="1")]
+    pub context: ::core::option::Option<plugin::CommandContext>,
+    /// The message that the chat command originates from.
+    #[prost(message, optional, tag="2")]
+    pub message: ::core::option::Option<message::Message>,
 }
 /// \[Internal\] Output from a InstructionKind::ChatCommand request to Hank.
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct ChatCommandOutput {
 }
 /// \[Internal\] Input to a InstructionKind::ChatMessage request to Hank.
-#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ChatMessageInput {
+    /// The chat message.
+    #[prost(message, optional, tag="1")]
+    pub message: ::core::option::Option<message::Message>,
 }
 /// \[Internal\] Output from a InstructionKind::ChatMessage request to Hank.
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
@@ -146,8 +155,22 @@ pub struct InstallInput {
 pub struct InstallOutput {
 }
 /// \[Internal\] Input to a InstructionKind::SheduledJob request to Hank.
-#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ScheduledJobInput {
+    #[prost(oneof="scheduled_job_input::ScheduledJob", tags="1, 2")]
+    pub scheduled_job: ::core::option::Option<scheduled_job_input::ScheduledJob>,
+}
+/// Nested message and enum types in `ScheduledJobInput`.
+pub mod scheduled_job_input {
+    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    pub enum ScheduledJob {
+        /// A cronjob to send to Hank.
+        #[prost(message, tag="1")]
+        CronJob(super::cron::CronJob),
+        /// A one shot to send to Hank.
+        #[prost(message, tag="2")]
+        OneShotJob(super::cron::OneShotJob),
+    }
 }
 /// \[Internal\] Output from a InstructionKind::ScheduledJob request to Hank.
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
