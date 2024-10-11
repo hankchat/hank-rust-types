@@ -7,6 +7,7 @@ pub enum EscalatedPrivilege {
     All = 0,
     ReloadPlugin = 1,
     LoadPlugin = 2,
+    InstructPlugin = 3,
 }
 impl EscalatedPrivilege {
     /// String value of the enum field names used in the ProtoBuf definition.
@@ -18,6 +19,7 @@ impl EscalatedPrivilege {
             EscalatedPrivilege::All => "ALL",
             EscalatedPrivilege::ReloadPlugin => "RELOAD_PLUGIN",
             EscalatedPrivilege::LoadPlugin => "LOAD_PLUGIN",
+            EscalatedPrivilege::InstructPlugin => "INSTRUCT_PLUGIN",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -26,6 +28,7 @@ impl EscalatedPrivilege {
             "ALL" => Some(Self::All),
             "RELOAD_PLUGIN" => Some(Self::ReloadPlugin),
             "LOAD_PLUGIN" => Some(Self::LoadPlugin),
+            "INSTRUCT_PLUGIN" => Some(Self::InstructPlugin),
             _ => None,
         }
     }
