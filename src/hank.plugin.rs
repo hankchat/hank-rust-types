@@ -176,21 +176,6 @@ pub struct CommandContext {
     #[prost(message, optional, boxed, tag="3")]
     pub subcommand: ::core::option::Option<::prost::alloc::boxed::Box<CommandContext>>,
 }
-/// \[Internal\] An instruction to send to hank plugin.
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct Instruction {
-    /// The kind of instruction to send to the hank plugin.
-    #[prost(enumeration="InstructionKind", tag="1")]
-    pub kind: i32,
-    /// An input to send to the hank plugin.
-    #[prost(bytes="vec", tag="2")]
-    pub input: ::prost::alloc::vec::Vec<u8>,
-    /// An optional target plugin name to send the instruciton to.
-    #[prost(string, optional, tag="3")]
-    pub target: ::core::option::Option<::prost::alloc::string::String>,
-}
 /// \[Internal\] Kinds of instructions that can be sent to hank plugins.
 #[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
@@ -244,5 +229,20 @@ impl InstructionKind {
             _ => None,
         }
     }
+}
+/// \[Internal\] An instruction to send to hank plugin.
+#[derive(serde::Serialize, serde::Deserialize)]
+#[serde(default)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct Instruction {
+    /// The kind of instruction to send to the hank plugin.
+    #[prost(enumeration="InstructionKind", tag="1")]
+    pub kind: i32,
+    /// An input to send to the hank plugin.
+    #[prost(bytes="vec", tag="2")]
+    pub input: ::prost::alloc::vec::Vec<u8>,
+    /// An optional target plugin name to send the instruciton to.
+    #[prost(string, optional, tag="3")]
+    pub target: ::core::option::Option<::prost::alloc::string::String>,
 }
 // @@protoc_insertion_point(module)

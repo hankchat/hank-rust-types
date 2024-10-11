@@ -184,6 +184,17 @@ pub struct ShutdownInput {
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct ShutdownOutput {
 }
+/// \[Internal\] Input to a instruct plugin request to Hank.
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct InstructPluginInput {
+    /// The the instruction to send to a Hank plugin.
+    #[prost(message, optional, tag="1")]
+    pub instruction: ::core::option::Option<plugin::Instruction>,
+}
+/// \[Internal\] Output from a instruct plugin request to Hank.
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct InstructPluginOutput {
+}
 /// \[Internal\] Input to a handle chat command request to Hank.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct HandleChatCommandInput {
