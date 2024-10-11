@@ -70,3 +70,53 @@ impl<'de> serde::de::Deserialize<'de> for access_check::AccessCheckChain {
         })
     }
 }
+
+#[derive(Default)]
+pub struct InstructionBuilder<T>
+where
+    T: Default + prost::Message,
+{
+    kind: plugin::InstructionKind,
+    input: T,
+    target: Option<String>,
+}
+
+impl<T> InstructionBuilder<T>
+where
+    T: Default + prost::Message,
+{
+    pub fn new(kind: plugin::InstructionKind) -> Self {
+        Self {
+            kind,
+            ..Default::default()
+        }
+    }
+
+    pub fn with_input(self, input: T) -> Self {
+        Self { input, ..self }
+    }
+
+    pub fn with_target(self, target: String) -> Self {
+        Self {
+            target: Some(target),
+            ..self
+        }
+    }
+
+    pub fn build(self) -> plugin::Instruction {
+        self.into()
+    }
+}
+
+impl<T> From<InstructionBuilder<T>> for plugin::Instruction
+where
+    T: Default + prost::Message,
+{
+    fn from(value: InstructionBuilder<T>) -> Self {
+        plugin::Instruction {
+            kind: value.kind.into(),
+            input: value.input.encode_to_vec(),
+            target: value.target,
+        }
+    }
+}
