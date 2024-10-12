@@ -29,6 +29,7 @@ impl Argument {
 #[cfg(feature = "builder")]
 impl ArgumentBuilder {
     pub fn build(&self) -> Argument {
-        self.fallible_build().map_err(|e| println!("{:?}", e));
+        self.fallible_build()
+            .expect("All required fields were initialized")
     }
 }
