@@ -195,6 +195,17 @@ pub struct InstructPluginInput {
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct InstructPluginOutput {
 }
+/// \[Internal\] Input to an unload plugin request to Hank.
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct UnloadPluginInput {
+    /// The plugin to unload.
+    #[prost(string, tag="1")]
+    pub plugin: ::prost::alloc::string::String,
+}
+/// \[Internal\] Output from an unload plugin request to Hank.
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct UnloadPluginOutput {
+}
 /// \[Internal\] Input to a handle chat command request to Hank.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct HandleChatCommandInput {
