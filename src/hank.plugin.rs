@@ -39,7 +39,7 @@ impl EscalatedPrivilege {
 /// Arguments for a plugin or a plugins subcommands.
 #[derive(serde::Serialize, serde::Deserialize)]
 #[cfg_attr(feature = "builder", derive(derive_builder::Builder))]
-#[cfg_attr(feature = "builder", builder(setter(into, strip_option)))]
+#[cfg_attr(feature = "builder", builder(setter(into, strip_option), custom_constructor, build_fn(name = "fallible_build")))]
 #[serde(default)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Argument {
@@ -65,7 +65,7 @@ pub struct Argument {
 /// Plugin commands.
 #[derive(serde::Serialize, serde::Deserialize)]
 #[cfg_attr(feature = "builder", derive(derive_builder::Builder))]
-#[cfg_attr(feature = "builder", builder(setter(into, strip_option)))]
+#[cfg_attr(feature = "builder", builder(setter(into, strip_option), custom_constructor, build_fn(name = "fallible_build")))]
 #[serde(default)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Command {
@@ -256,3 +256,34 @@ pub struct Instruction {
     pub target: ::core::option::Option<::prost::alloc::string::String>,
 }
 // @@protoc_insertion_point(module)
+// Customizations from hank.plugin.customizations.rs
+impl Command {
+    pub fn new(name: impl Into<String>, description: impl Into<String>) -> CommandBuilder {
+        CommandBuilder {
+            name: Some(name.into()),
+            description: Some(description.into()),
+            ..CommandBuilder::create_empty()
+        }
+    }
+}
+impl CommandBuilder {
+    pub fn build(&self) -> Command {
+        self.fallible_build()
+            .expect("All required fields were initialized")
+    }
+}
+impl Argument {
+    pub fn new(name: impl Into<String>, description: impl Into<String>) -> ArgumentBuilder {
+        ArgumentBuilder {
+            name: Some(name.into()),
+            description: Some(description.into()),
+            ..ArgumentBuilder::create_empty()
+        }
+    }
+}
+impl ArgumentBuilder {
+    pub fn build(&self) -> Argument {
+        self.fallible_build()
+            .expect("All required fields were initialized")
+    }
+}

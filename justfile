@@ -44,10 +44,11 @@ types protos="protos":
             --prost_opt=type_attribute=.hank.plugin="#[derive(serde::Serialize\, serde::Deserialize)]" \
             --prost_opt=message_attribute=.hank.plugin="#[serde(default)]" \
             --prost_opt=type_attribute=hank.plugin.Command='#[cfg_attr(feature = "builder"\, derive(derive_builder::Builder))]' \
-            --prost_opt=type_attribute=hank.plugin.Command='#[cfg_attr(feature = "builder"\, builder(setter(into\, strip_option)))]' \
+            --prost_opt=type_attribute=hank.plugin.Command='#[cfg_attr(feature = "builder"\, builder(setter(into\, strip_option)\, custom_constructor\, build_fn(name = "fallible_build")))]' \
             --prost_opt=type_attribute=hank.plugin.Argument='#[cfg_attr(feature = "builder"\, derive(derive_builder::Builder))]' \
-            --prost_opt=type_attribute=hank.plugin.Argument='#[cfg_attr(feature = "builder"\, builder(setter(into\, strip_option)))]' \
+            --prost_opt=type_attribute=hank.plugin.Argument='#[cfg_attr(feature = "builder"\, builder(setter(into\, strip_option)\, custom_constructor\, build_fn(name = "fallible_build")))]' \
             --prost-crate_out=. \
             --prost-crate_opt=gen_crate=./Cargo.toml \
             $protos
     cat lib.customizations.rs >> src/lib.rs
+    cat hank.plugin.customizations.rs >> src/hank.plugin.rs
