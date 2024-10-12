@@ -38,6 +38,7 @@ impl EscalatedPrivilege {
 }
 /// Arguments for a plugin or a plugins subcommands.
 #[derive(serde::Serialize, serde::Deserialize)]
+#[cfg_attr(feature = "builder", derive(derive_builder::Builder))]
 #[serde(default)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Argument {
@@ -62,6 +63,7 @@ pub struct Argument {
 }
 /// Plugin commands.
 #[derive(serde::Serialize, serde::Deserialize)]
+#[cfg_attr(feature = "builder", derive(derive_builder::Builder))]
 #[serde(default)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Command {
