@@ -1,4 +1,5 @@
 // Customizations from hank.plugin.customizations.rs
+#[cfg(feature = "builder")]
 impl Command {
     pub fn new(name: impl Into<String>, description: impl Into<String>) -> CommandBuilder {
         CommandBuilder {
@@ -8,12 +9,14 @@ impl Command {
         }
     }
 }
+#[cfg(feature = "builder")]
 impl CommandBuilder {
     pub fn build(&self) -> Command {
         self.fallible_build()
             .expect("All required fields were initialized")
     }
 }
+#[cfg(feature = "builder")]
 impl Argument {
     pub fn new(name: impl Into<String>, description: impl Into<String>) -> ArgumentBuilder {
         ArgumentBuilder {
@@ -23,6 +26,7 @@ impl Argument {
         }
     }
 }
+#[cfg(feature = "builder")]
 impl ArgumentBuilder {
     pub fn build(&self) -> Argument {
         self.fallible_build()
