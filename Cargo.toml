@@ -6,7 +6,7 @@ homepage = "https://hank.chat"
 repository = "https://github.com/hankchat/hank-rust-types"
 readme = "README.md"
 keywords = ["hank", "chat", "bot", "chatbot"]
-version = "0.1.33"
+version = "0.1.34"
 edition = "2021"
 
 [dependencies]
