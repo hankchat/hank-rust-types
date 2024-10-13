@@ -24,18 +24,17 @@ impl Metadata {
     }
 }
 #[cfg(feature = "builder")]
-#[allow(dead_code)]
 impl MetadataBuilder {
-    fn aliases(&mut self, value: impl IntoIterator<Item = impl Into<String>>) {
+    pub fn aliases(&mut self, value: impl IntoIterator<Item = impl Into<String>>) {
         self.aliases = Some(value.into_iter().map(Into::into).collect())
     }
-    fn escalation_key(&mut self, value: impl Into<String>) {
+    pub fn escalation_key(&mut self, value: impl Into<String>) {
         self.escalation_key = Some(Some(value.into()))
     }
-    fn escalated_privileges(&mut self, value: impl IntoIterator<Item = impl Into<i32>>) {
+    pub fn escalated_privileges(&mut self, value: impl IntoIterator<Item = impl Into<i32>>) {
         self.escalated_privileges = Some(value.into_iter().map(Into::into).collect())
     }
-    fn access_checks(&mut self, value: AccessChecks) {
+    pub fn access_checks(&mut self, value: AccessChecks) {
         self.access_checks = Some(match value {
             AccessChecks::Array(checks) => Some(crate::access_check::AccessCheckChain {
                 operator: crate::access_check::AccessCheckOperator::Or.into(),
