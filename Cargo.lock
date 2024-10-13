@@ -830,7 +830,7 @@ dependencies = [
 
 [[package]]
 name = "hank-types"
-version = "0.1.37"
+version = "0.1.38"
 dependencies = [
  "derive_builder",
  "kameo",
