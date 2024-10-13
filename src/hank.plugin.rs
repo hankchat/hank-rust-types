@@ -97,6 +97,11 @@ pub struct Command {
     /// This command can optionally be gated by access checks.
     #[prost(message, optional, tag="8")]
     pub access_checks: ::core::option::Option<super::access_check::AccessCheckChain>,
+    /// Show help if no args are passed to this command.
+    ///
+    /// NOTE: Subcommands count as arguments.
+    #[prost(bool, tag="9")]
+    pub arg_required_else_help: bool,
 }
 /// Metadata for a plugin.
 #[cfg_attr(feature = "kameo", derive(kameo::Reply))]
