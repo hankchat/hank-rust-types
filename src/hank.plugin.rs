@@ -101,6 +101,8 @@ pub struct Command {
 /// Metadata for a plugin.
 #[cfg_attr(feature = "kameo", derive(kameo::Reply))]
 #[derive(serde::Serialize, serde::Deserialize)]
+#[cfg_attr(feature = "builder", derive(derive_builder::Builder))]
+#[cfg_attr(feature = "builder", builder(default, setter(into, strip_option), custom_constructor, build_fn(name = "fallible_build")))]
 #[serde(default)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Metadata {
@@ -257,6 +259,30 @@ pub struct Instruction {
 }
 // @@protoc_insertion_point(module)
 // Customizations from hank.plugin.customizations.rs
+#[cfg(feature = "builder")]
+impl Metadata {
+    pub fn new(
+        name: impl Into<String>,
+        author: impl Into<String>,
+        description: impl Into<String>,
+        version: impl Into<String>,
+    ) -> MetadataBuilder {
+        MetadataBuilder {
+            name: Some(name.into()),
+            author: Some(author.into()),
+            description: Some(description.into()),
+            version: Some(version.into()),
+            ..MetadataBuilder::create_empty()
+        }
+    }
+}
+#[cfg(feature = "builder")]
+impl MetadataBuilder {
+    pub fn build(&self) -> Metadata {
+        self.fallible_build()
+            .expect("All required fields were initialized")
+    }
+}
 #[cfg(feature = "builder")]
 impl Command {
     pub fn new(name: impl Into<String>, description: impl Into<String>) -> CommandBuilder {
