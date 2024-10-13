@@ -49,6 +49,7 @@ pub mod hank {
 }
 // Customizations from lib.customizations.rs
 pub use hank::*;
+pub use prost_types::{Timestamp, TimestampError};
 
 impl serde::ser::Serialize for access_check::AccessCheckChain {
     fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
