@@ -289,16 +289,22 @@ impl Metadata {
 }
 #[cfg(feature = "builder")]
 impl MetadataBuilder {
-    pub fn aliases(&mut self, value: impl IntoIterator<Item = impl Into<String>>) {
-        self.aliases = Some(value.into_iter().map(Into::into).collect())
+    pub fn aliases(&mut self, value: impl IntoIterator<Item = impl Into<String>>) -> &mut Self {
+        self.aliases = Some(value.into_iter().map(Into::into).collect());
+        self
     }
-    pub fn escalation_key(&mut self, value: impl Into<String>) {
-        self.escalation_key = Some(Some(value.into()))
+    pub fn escalation_key(&mut self, value: impl Into<String>) -> &mut Self {
+        self.escalation_key = Some(Some(value.into()));
+        self
     }
-    pub fn escalated_privileges(&mut self, value: impl IntoIterator<Item = impl Into<i32>>) {
-        self.escalated_privileges = Some(value.into_iter().map(Into::into).collect())
+    pub fn escalated_privileges(
+        &mut self,
+        value: impl IntoIterator<Item = impl Into<i32>>,
+    ) -> &mut Self {
+        self.escalated_privileges = Some(value.into_iter().map(Into::into).collect());
+        self
     }
-    pub fn access_checks(&mut self, value: AccessChecks) {
+    pub fn access_checks(&mut self, value: AccessChecks) -> &mut Self {
         self.access_checks = Some(match value {
             AccessChecks::Array(checks) => Some(crate::access_check::AccessCheckChain {
                 operator: crate::access_check::AccessCheckOperator::Or.into(),
@@ -309,7 +315,8 @@ impl MetadataBuilder {
                 checks: vec![check],
             }),
             AccessChecks::Full(full) => Some(full),
-        })
+        });
+        self
     }
     pub fn build(&self) -> Metadata {
         self.fallible_build()
