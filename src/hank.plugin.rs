@@ -170,6 +170,11 @@ pub struct Metadata {
     /// Pool size this plugin requests.
     #[prost(int32, optional, tag="16")]
     pub pool_size: ::core::option::Option<i32>,
+    /// Show help if no args are passed to the plugin command.
+    ///
+    /// NOTE: Subcommands count as arguments.
+    #[prost(bool, tag="17")]
+    pub arg_required_else_help: bool,
 }
 /// An argument passed to a commands context.
 #[derive(serde::Serialize, serde::Deserialize)]
