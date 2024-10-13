@@ -54,8 +54,12 @@ types protos="protos":
             --prost_opt=type_attribute=hank.plugin.Command='#[cfg_attr(feature = "builder"\, builder(default\, setter(into\, strip_option)\, custom_constructor\, build_fn(name = "fallible_build")))]' \
             --prost_opt=type_attribute=hank.plugin.Argument='#[cfg_attr(feature = "builder"\, derive(derive_builder::Builder))]' \
             --prost_opt=type_attribute=hank.plugin.Argument='#[cfg_attr(feature = "builder"\, builder(default\, setter(into\, strip_option)\, custom_constructor\, build_fn(name = "fallible_build")))]' \
+            --prost_opt=type_attribute=hank.database.PreparedStatement='#[cfg_attr(feature = "builder"\, derive(derive_builder::Builder))]' \
+            --prost_opt=type_attribute=hank.database.PreparedStatement='#[cfg_attr(feature = "builder"\, builder(default\, setter(into\, strip_option)\, custom_constructor\, build_fn(name = "fallible_build")))]' \
+            --prost_opt=field_attribute=hank.database.PreparedStatement.values='#[cfg_attr(feature = "builder"\, builder(setter(custom)))]' \
             --prost-crate_out=. \
             --prost-crate_opt=gen_crate=./Cargo.toml \
             $protos
     cat lib.customizations.rs >> src/lib.rs
     cat hank.plugin.customizations.rs >> src/hank.plugin.rs
+    cat hank.database.customizations.rs >> src/hank.database.rs
