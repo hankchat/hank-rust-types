@@ -10,6 +10,12 @@ pub mod hank {
         include!("hank.access_check.rs");
         // @@protoc_insertion_point(hank.access_check)
     }
+    #[cfg(feature = "hank-channel")]
+    // @@protoc_insertion_point(attribute:hank.channel)
+    pub mod channel {
+        include!("hank.channel.rs");
+        // @@protoc_insertion_point(hank.channel)
+    }
     #[cfg(feature = "hank-cron")]
     // @@protoc_insertion_point(attribute:hank.cron)
     pub mod cron {
@@ -33,6 +39,12 @@ pub mod hank {
     pub mod plugin {
         include!("hank.plugin.rs");
         // @@protoc_insertion_point(hank.plugin)
+    }
+    #[cfg(feature = "hank-user")]
+    // @@protoc_insertion_point(attribute:hank.user)
+    pub mod user {
+        include!("hank.user.rs");
+        // @@protoc_insertion_point(hank.user)
     }
 }
 // Customizations from lib.customizations.rs
