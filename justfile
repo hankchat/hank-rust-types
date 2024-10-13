@@ -45,6 +45,10 @@ types protos="protos":
             --prost_opt=message_attribute=.hank.plugin="#[serde(default)]" \
             --prost_opt=type_attribute=hank.plugin.Metadata='#[cfg_attr(feature = "builder"\, derive(derive_builder::Builder))]' \
             --prost_opt=type_attribute=hank.plugin.Metadata='#[cfg_attr(feature = "builder"\, builder(default\, setter(into\, strip_option)\, custom_constructor\, build_fn(name = "fallible_build")))]' \
+            --prost_opt=field_attribute=hank.plugin.Metadata.aliases='#[cfg_attr(feature = "builder"\, builder(setter(custom)))]' \
+            --prost_opt=field_attribute=hank.plugin.Metadata.escalation_key='#[cfg_attr(feature = "builder"\, builder(setter(custom)))]' \
+            --prost_opt=field_attribute=hank.plugin.Metadata.escalated_privileges='#[cfg_attr(feature = "builder"\, builder(setter(custom)))]' \
+            --prost_opt=field_attribute=hank.plugin.Metadata.access_checks='#[cfg_attr(feature = "builder"\, builder(setter(custom)))]' \
             --prost_opt=type_attribute=hank.plugin.Command='#[cfg_attr(feature = "builder"\, derive(derive_builder::Builder))]' \
             --prost_opt=type_attribute=hank.plugin.Command='#[cfg_attr(feature = "builder"\, builder(default\, setter(into\, strip_option)\, custom_constructor\, build_fn(name = "fallible_build")))]' \
             --prost_opt=type_attribute=hank.plugin.Argument='#[cfg_attr(feature = "builder"\, derive(derive_builder::Builder))]' \

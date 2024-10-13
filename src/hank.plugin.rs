@@ -125,13 +125,16 @@ pub struct Metadata {
     ///
     /// All functionality of this plugin can optionally be gated by accses checks.
     #[prost(message, optional, tag="5")]
+    #[cfg_attr(feature = "builder", builder(setter(custom)))]
     pub access_checks: ::core::option::Option<super::access_check::AccessCheckChain>,
     /// A secret escalation key that grants this plugin specific escalated
     /// privileges.
     #[prost(string, optional, tag="6")]
+    #[cfg_attr(feature = "builder", builder(setter(custom)))]
     pub escalation_key: ::core::option::Option<::prost::alloc::string::String>,
     /// A list of escalated privileges that this plugin requests to use.
     #[prost(enumeration="EscalatedPrivilege", repeated, tag="7")]
+    #[cfg_attr(feature = "builder", builder(setter(custom)))]
     pub escalated_privileges: ::prost::alloc::vec::Vec<i32>,
     /// The author of the plugin.
     #[prost(string, tag="8")]
@@ -147,6 +150,7 @@ pub struct Metadata {
     pub command_name: ::core::option::Option<::prost::alloc::string::String>,
     /// Optional aliases for the plugin command.
     #[prost(string, repeated, tag="12")]
+    #[cfg_attr(feature = "builder", builder(setter(custom)))]
     pub aliases: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
     /// Arguments for the plugin command.
     #[prost(message, repeated, tag="13")]
@@ -260,6 +264,13 @@ pub struct Instruction {
 // @@protoc_insertion_point(module)
 // Customizations from hank.plugin.customizations.rs
 #[cfg(feature = "builder")]
+#[derive(Debug)]
+pub enum AccessChecks {
+    Array(Vec<crate::access_check::AccessCheck>),
+    Single(crate::access_check::AccessCheck),
+    Full(crate::access_check::AccessCheckChain),
+}
+#[cfg(feature = "builder")]
 impl Metadata {
     pub fn new(
         name: impl Into<String>,
@@ -277,7 +288,30 @@ impl Metadata {
     }
 }
 #[cfg(feature = "builder")]
+#[allow(dead_code)]
 impl MetadataBuilder {
+    fn aliases(&mut self, value: impl IntoIterator<Item = impl Into<String>>) {
+        self.aliases = Some(value.into_iter().map(Into::into).collect())
+    }
+    fn escalation_key(&mut self, value: impl Into<String>) {
+        self.escalation_key = Some(Some(value.into()))
+    }
+    fn escalated_privileges(&mut self, value: impl IntoIterator<Item = impl Into<i32>>) {
+        self.escalated_privileges = Some(value.into_iter().map(Into::into).collect())
+    }
+    fn access_checks(&mut self, value: AccessChecks) {
+        self.access_checks = Some(match value {
+            AccessChecks::Array(checks) => Some(crate::access_check::AccessCheckChain {
+                operator: crate::access_check::AccessCheckOperator::Or.into(),
+                checks,
+            }),
+            AccessChecks::Single(check) => Some(crate::access_check::AccessCheckChain {
+                operator: crate::access_check::AccessCheckOperator::Or.into(),
+                checks: vec![check],
+            }),
+            AccessChecks::Full(full) => Some(full),
+        })
+    }
     pub fn build(&self) -> Metadata {
         self.fallible_build()
             .expect("All required fields were initialized")

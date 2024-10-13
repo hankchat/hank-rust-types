@@ -1,5 +1,12 @@
 // Customizations from hank.plugin.customizations.rs
 #[cfg(feature = "builder")]
+#[derive(Debug)]
+pub enum AccessChecks {
+    Array(Vec<crate::access_check::AccessCheck>),
+    Single(crate::access_check::AccessCheck),
+    Full(crate::access_check::AccessCheckChain),
+}
+#[cfg(feature = "builder")]
 impl Metadata {
     pub fn new(
         name: impl Into<String>,
@@ -17,7 +24,30 @@ impl Metadata {
     }
 }
 #[cfg(feature = "builder")]
+#[allow(dead_code)]
 impl MetadataBuilder {
+    fn aliases(&mut self, value: impl IntoIterator<Item = impl Into<String>>) {
+        self.aliases = Some(value.into_iter().map(Into::into).collect())
+    }
+    fn escalation_key(&mut self, value: impl Into<String>) {
+        self.escalation_key = Some(Some(value.into()))
+    }
+    fn escalated_privileges(&mut self, value: impl IntoIterator<Item = impl Into<i32>>) {
+        self.escalated_privileges = Some(value.into_iter().map(Into::into).collect())
+    }
+    fn access_checks(&mut self, value: AccessChecks) {
+        self.access_checks = Some(match value {
+            AccessChecks::Array(checks) => Some(crate::access_check::AccessCheckChain {
+                operator: crate::access_check::AccessCheckOperator::Or.into(),
+                checks,
+            }),
+            AccessChecks::Single(check) => Some(crate::access_check::AccessCheckChain {
+                operator: crate::access_check::AccessCheckOperator::Or.into(),
+                checks: vec![check],
+            }),
+            AccessChecks::Full(full) => Some(full),
+        })
+    }
     pub fn build(&self) -> Metadata {
         self.fallible_build()
             .expect("All required fields were initialized")
