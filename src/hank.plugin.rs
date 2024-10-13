@@ -160,6 +160,7 @@ pub struct Metadata {
     pub subcommands: ::prost::alloc::vec::Vec<Command>,
     /// Hosts that this plugin requests permissions to access via HTTP.
     #[prost(string, repeated, tag="15")]
+    #[cfg_attr(feature = "builder", builder(setter(custom)))]
     pub allowed_hosts: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
     /// Pool size this plugin requests.
     #[prost(int32, optional, tag="16")]
@@ -289,6 +290,13 @@ impl Metadata {
 }
 #[cfg(feature = "builder")]
 impl MetadataBuilder {
+    pub fn allowed_hosts(
+        &mut self,
+        value: impl IntoIterator<Item = impl Into<String>>,
+    ) -> &mut Self {
+        self.allowed_hosts = Some(value.into_iter().map(Into::into).collect());
+        self
+    }
     pub fn aliases(&mut self, value: impl IntoIterator<Item = impl Into<String>>) -> &mut Self {
         self.aliases = Some(value.into_iter().map(Into::into).collect());
         self

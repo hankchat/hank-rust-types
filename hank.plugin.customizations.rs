@@ -25,6 +25,13 @@ impl Metadata {
 }
 #[cfg(feature = "builder")]
 impl MetadataBuilder {
+    pub fn allowed_hosts(
+        &mut self,
+        value: impl IntoIterator<Item = impl Into<String>>,
+    ) -> &mut Self {
+        self.allowed_hosts = Some(value.into_iter().map(Into::into).collect());
+        self
+    }
     pub fn aliases(&mut self, value: impl IntoIterator<Item = impl Into<String>>) -> &mut Self {
         self.aliases = Some(value.into_iter().map(Into::into).collect());
         self
