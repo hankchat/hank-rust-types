@@ -8,8 +8,11 @@ pub struct SendMessageInput {
     pub message: ::core::option::Option<message::Message>,
 }
 /// \[Internal\] Output from a send message request to Hank.
-#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SendMessageOutput {
+    /// An error message, if there was an error.
+    #[prost(string, optional, tag="1")]
+    pub error: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// \[Internal\] Input to a reaction request to Hank.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -19,8 +22,11 @@ pub struct ReactInput {
     pub reaction: ::core::option::Option<message::Reaction>,
 }
 /// \[Internal\] Output from a reaction request to Hank.
-#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ReactOutput {
+    /// An error message, if there was an error.
+    #[prost(string, optional, tag="1")]
+    pub error: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// \[Internal\] Input to a db query request to Hank.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -47,8 +53,11 @@ pub struct CronInput {
     pub cron_job: ::core::option::Option<cron::CronJob>,
 }
 /// \[Internal\] Output from a cron request to Hank.
-#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CronOutput {
+    /// An error message, if there was an error.
+    #[prost(string, optional, tag="1")]
+    pub error: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// \[Internal\] Input to a one shot request to Hank.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -58,8 +67,11 @@ pub struct OneShotInput {
     pub one_shot_job: ::core::option::Option<cron::OneShotJob>,
 }
 /// \[Internal\] Output from a one shot request to Hank.
-#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, ::prost::Message)]
 pub struct OneShotOutput {
+    /// An error message, if there was an error.
+    #[prost(string, optional, tag="1")]
+    pub error: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// \[Internal\] Input to a reload plugin request to Hank.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -69,8 +81,11 @@ pub struct ReloadPluginInput {
     pub plugin: ::prost::alloc::string::String,
 }
 /// \[Internal\] Output from a reload plugin request to Hank.
-#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ReloadPluginOutput {
+    /// An error message, if there was an error.
+    #[prost(string, optional, tag="1")]
+    pub error: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// \[Internal\] Input to a load plugin request to Hank.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -104,6 +119,9 @@ pub struct LoadPluginOutput {
     /// The plugins extism::Manifest, as JSON.
     #[prost(string, tag="2")]
     pub manifest: ::prost::alloc::string::String,
+    /// An error message, if there was an error.
+    #[prost(string, optional, tag="3")]
+    pub error: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// \[Internal\] Input to a InstructionKind::ChatCommand request to Hank.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -195,8 +213,11 @@ pub struct InstructPluginInput {
     pub instruction: ::core::option::Option<plugin::Instruction>,
 }
 /// \[Internal\] Output from a instruct plugin request to Hank.
-#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, ::prost::Message)]
 pub struct InstructPluginOutput {
+    /// An error message, if there was an error.
+    #[prost(string, optional, tag="1")]
+    pub error: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// \[Internal\] Input to an unload plugin request to Hank.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -206,8 +227,11 @@ pub struct UnloadPluginInput {
     pub plugin: ::prost::alloc::string::String,
 }
 /// \[Internal\] Output from an unload plugin request to Hank.
-#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UnloadPluginOutput {
+    /// An error message, if there was an error.
+    #[prost(string, optional, tag="1")]
+    pub error: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// \[Internal\] Input to a handle chat command request to Hank.
 #[derive(Clone, PartialEq, ::prost::Message)]
