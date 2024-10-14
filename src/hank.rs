@@ -35,6 +35,9 @@ pub struct DbQueryOutput {
     /// The database results from the query from Hank.
     #[prost(message, optional, tag="1")]
     pub results: ::core::option::Option<database::Results>,
+    /// An error message, if there was an error.
+    #[prost(string, optional, tag="2")]
+    pub error: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// \[Internal\] Input to a cron request to Hank.
 #[derive(Clone, PartialEq, ::prost::Message)]
