@@ -225,6 +225,11 @@ pub struct UnloadPluginInput {
     /// The plugin to unload.
     #[prost(string, tag="1")]
     pub plugin: ::prost::alloc::string::String,
+    /// Whether or not hank should clean up any plugin assets, e.g. database file.
+    /// This should be set to true if this plugin is being unloaded as a result
+    /// of an uninstall command.
+    #[prost(bool, tag="2")]
+    pub cleanup: bool,
 }
 /// \[Internal\] Output from an unload plugin request to Hank.
 #[derive(Clone, PartialEq, ::prost::Message)]
