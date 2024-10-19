@@ -20,6 +20,8 @@ pub struct Message {
     pub content: ::prost::alloc::string::String,
 }
 /// A reaction to a message.
+#[cfg_attr(feature = "builder", derive(derive_builder::Builder))]
+#[cfg_attr(feature = "builder", builder(default, setter(into, strip_option), custom_constructor, build_fn(name = "fallible_build")))]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Reaction {
     /// A message to react to.
@@ -30,3 +32,20 @@ pub struct Reaction {
     pub emoji: ::prost::alloc::string::String,
 }
 // @@protoc_insertion_point(module)
+// Customizations from hank.database.customizations.rs
+#[cfg(feature = "builder")]
+impl Reaction {
+    pub fn new(emoji: impl Into<String>, message: Message) -> ReactionBuilder {
+        ReactionBuilder {
+            emoji: Some(emoji.into()),
+            message: Some(Some(message)),
+        }
+    }
+}
+#[cfg(feature = "builder")]
+impl ReactionBuilder {
+    pub fn build(&self) -> Reaction {
+        self.fallible_build()
+            .expect("All required fields were initialized")
+    }
+}
