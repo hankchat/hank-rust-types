@@ -238,6 +238,17 @@ pub struct UnloadPluginOutput {
     #[prost(string, optional, tag="1")]
     pub error: ::core::option::Option<::prost::alloc::string::String>,
 }
+/// \[Internal\] Input to a datetime request to Hank.
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct DatetimeInput {
+}
+/// \[Internal\] Output from a datetime request to Hank.
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct DatetimeOutput {
+    /// Hanks local date/time in RFC 3339 format.
+    #[prost(string, tag="1")]
+    pub datetime: ::prost::alloc::string::String,
+}
 /// \[Internal\] Input to a handle chat command request to Hank.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct HandleChatCommandInput {

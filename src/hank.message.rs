@@ -6,7 +6,7 @@ pub struct Message {
     /// The id of a received message
     #[prost(string, optional, tag="1")]
     pub id: ::core::option::Option<::prost::alloc::string::String>,
-    /// The time the message was sent
+    /// The UTC epoch time the message was sent
     #[prost(message, optional, tag="2")]
     pub timestamp: ::core::option::Option<::prost_types::Timestamp>,
     /// The user who authored the message
