@@ -249,6 +249,23 @@ pub struct DatetimeOutput {
     #[prost(string, tag="1")]
     pub datetime: ::prost::alloc::string::String,
 }
+/// \[Internal\] Input to a get user request to Hank.
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetUserInput {
+    /// The id of the user to look up, as a string.
+    #[prost(string, tag="1")]
+    pub id: ::prost::alloc::string::String,
+}
+/// \[Internal\] Output from a get user request to Hank.
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetUserOutput {
+    /// A user object for the queried user, if a user was found.
+    #[prost(message, optional, tag="1")]
+    pub user: ::core::option::Option<user::User>,
+    /// An error message, if there was an error.
+    #[prost(string, optional, tag="2")]
+    pub error: ::core::option::Option<::prost::alloc::string::String>,
+}
 /// \[Internal\] Input to a handle chat command request to Hank.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct HandleChatCommandInput {
